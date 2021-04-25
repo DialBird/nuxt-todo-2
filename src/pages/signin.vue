@@ -61,6 +61,7 @@ import {
 } from '@nuxtjs/composition-api'
 
 export default defineComponent({
+  middleware: 'beforeAuth',
   setup() {
     const { $supabase } = useContext()
     const router = useRouter()
