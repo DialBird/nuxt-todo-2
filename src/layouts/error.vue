@@ -7,7 +7,9 @@
       <div
         class="flex flex-col items-start space-y-3 sm:flex-row sm:space-y-0 sm:items-center sm:space-x-3"
       >
-        <p class="font-semibold text-red-500 text-9xl dark:text-red-600">404</p>
+        <p class="font-semibold text-red-500 text-9xl dark:text-red-600">
+          {{ error.statusCode }}
+        </p>
         <div class="space-y-2">
           <h1 id="pageTitle" class="flex items-center space-x-2">
             <svg
