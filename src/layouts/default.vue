@@ -1,12 +1,12 @@
 <template>
   <div>
-    <Header />
-    <Nuxt />
+    <Header :isSignin="Boolean(isSignin)" />
+    <Nuxt :isSignin="Boolean(isSignin)" />
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@nuxtjs/composition-api'
+import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
 import Header from '@/components/Header.vue'
 
 export default defineComponent({
@@ -14,8 +14,12 @@ export default defineComponent({
     Header,
   },
   setup() {
+    const { $supabase } = useContext()
+    const isSignin = ref($supabase.auth.session())
+
     return {
       Header,
+      isSignin,
     }
   },
 })

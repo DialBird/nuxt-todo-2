@@ -46,21 +46,31 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, useContext } from '@nuxtjs/composition-api'
+import {
+  defineComponent,
+  ref,
+  useContext,
+  useRouter,
+} from '@nuxtjs/composition-api'
 
 export default defineComponent({
   name: 'Header',
+  props: {
+    isSignin: {
+      type: Boolean,
+      required: true,
+    },
+  },
   setup() {
     const { $supabase } = useContext()
-    const isSignin = ref($supabase.auth.session())
+    const router = useRouter()
 
-    $supabase.auth.onAuthStateChange((_, session) => {
-      isSignin.value = session
-    })
+    const handleSignOut = () => {
+      $supabase.auth.signOut()
+      router.go(0)
+    }
 
-    const handleSignOut = () => $supabase.auth.signOut()
-
-    return { handleSignOut, isSignin }
+    return { handleSignOut }
   },
 })
 </script>
